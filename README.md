@@ -3,4 +3,5 @@ Wrapper for iptables to prevent locking yourself out of a VM, or accidentally ki
 
 ## Example
 Example: attempting to lock myself out of ssh ( 22/TCP ), however after the timeout expires, it rollsback iptables to its previous rules.
-![image](https://user-images.githubusercontent.com/37527017/184476988-9a915975-fd5d-4363-b4a3-933e31e04228.png)
+![image](https://user-images.githubusercontent.com/37527017/184477119-f0e45eaf-3ecc-4ad6-a7d7-a748a9dff567.png)
+
