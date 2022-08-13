@@ -41,6 +41,7 @@ if [[ -z "${TIMEOUT}" || -z "${COMMAND}" || -z "${BASE_BINARY}" ]] ; then
     usage
 fi
 
+echo "[PARAMS]"
 echo "TIMEOUT     = ${TIMEOUT} (ie. if no confirmation in ${TIMEOUT}, rollsback iptables change"
 echo "BASE_BINARY = ${BASE_BINARY}"
 echo "COMMAND     = ${COMMAND}"
@@ -53,7 +54,7 @@ eval "${BASE_BINARY} ${COMMAND}"
 retCode=$?
 
 if [[ retCode -ne 0 ]] ; then
-    echo "Command '${BASE_BINARY} ${COMMAND}' returned RC${retCode}"
+    echo "Command '${BASE_BINARY} ${COMMAND}' returned RC: ${retCode}"
     exit 1
 fi
 
