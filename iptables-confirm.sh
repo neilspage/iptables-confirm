@@ -42,7 +42,7 @@ if [[ -z "${TIMEOUT}" || -z "${COMMAND}" || -z "${BASE_BINARY}" ]] ; then
 fi
 
 echo "[PARAMS]"
-echo "TIMEOUT     = ${TIMEOUT} (ie. if no confirmation in ${TIMEOUT}, rollsback iptables change"
+echo "TIMEOUT     = ${TIMEOUT} (ie. if no confirmation in ${TIMEOUT} seconds, rollsback iptables change"
 echo "BASE_BINARY = ${BASE_BINARY}"
 echo "COMMAND     = ${COMMAND}"
 echo ""
@@ -54,17 +54,17 @@ eval "${BASE_BINARY} ${COMMAND}"
 retCode=$?
 
 if [[ retCode -ne 0 ]] ; then
-    echo "Command '${BASE_BINARY} ${COMMAND}' returned RC: ${retCode}"
+    echo "Command '${BASE_BINARY} ${COMMAND}' returned RC${retCode}"
     exit 1
 fi
 
 echo ""
 echo "[CHANGE ADDED]:"
 iptables-save > ${NEW_TMP_CFG}
-diff ${TMP_CFG} ${NEW_TMP_CFG}
+diff ${TMP_CFG} ${NEW_TMP_CFG} | awk '/> -/ { print }'
 rm ${NEW_TMP_CFG}
 
-echo "[y/N] to confirm changes [timeout: ${TIMEOUT}]:"
+echo "[y/N] to confirm changes [timeout: ${TIMEOUT}s]:"
 read -t "${TIMEOUT}" ret 2>&1 || :
 case "${ret:-}" in
         (y*|Y*)
