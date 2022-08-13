@@ -61,7 +61,7 @@ fi
 echo ""
 echo "[CHANGE ADDED]:"
 iptables-save > ${NEW_TMP_CFG}
-diff ${TMP_CFG} ${NEW_TMP_CFG} | awk '/>/,/-/ { print }'
+diff ${TMP_CFG} ${NEW_TMP_CFG} | awk '/> -/ { print }'
 rm ${NEW_TMP_CFG}
 
 echo "[y/N] to confirm changes [timeout: ${TIMEOUT}s]:"
