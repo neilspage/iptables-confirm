@@ -81,7 +81,7 @@ case "${ret:-}" in
                 else
                         echo "You specified "${ret-}", so we are rolling-back the change"
                 fi
-                iptables-restore < ${TMP_CFG}
+                ${BASE_BINARY}-restore < ${TMP_CFG}
                 rm ${TMP_CFG}
                 exit 255
                 ;;
